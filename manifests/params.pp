@@ -4,7 +4,7 @@
 class ssmtp::params {
 
   # Operating system specific definitions
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat' : {
       $supported                        = true
 

@@ -4,13 +4,13 @@
 class ssmtp::service {
   # sSMTP service configuration
   if $ssmtp::default_mta == 'ssmtp' {
-    if $::osfamily == 'RedHat' {
+    if $facts['os']['family'] == 'RedHat' {
       exec { 'alternatives --set mta /usr/sbin/sendmail.ssmtp':
         path   => '/bin:/sbin:/usr/bin:/usr/sbin',
         unless => 'test /etc/alternatives/mta -ef /usr/sbin/sendmail.ssmtp',
       }
     }
-    if $::osfamily == 'FreeBSD' {
+    if $facts['os']['family'] == 'FreeBSD' {
       file {
         $ssmtp::params::config_mailer_conf:
           ensure  => file,

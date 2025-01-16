@@ -16,7 +16,7 @@ describe 'ssmtp', :type => :class do
       it { is_expected.to contain_package('ssmtp') }
 
       # operating system specific tests
-      case facts[:osfamily]
+      case facts[:os][:family]
       when 'RedHat'
         it { is_expected.to contain_file('/etc/ssmtp/ssmtp.conf').with('ensure' => 'file', 'owner' => 'root', 'group' => 'mail', 'mode' => '0640') }
         it { is_expected.to contain_file('/etc/ssmtp/revaliases').with('ensure' => 'file', 'owner' => 'root', 'group' => 'root', 'mode' => '0644') }
